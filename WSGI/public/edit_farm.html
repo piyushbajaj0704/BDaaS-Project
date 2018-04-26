@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register a new farm</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<select id="farms_dropdown"> </select><button id="load_farm">load</button>
+
+<div class="container">
+    <h2>edit a farm</h2>
+    <form action="/api/farm/edit" id="base_form" method="post">
+        <label>Farm ID: </label><input id="farm_id" type="text" name="farm_id" required ><br>
+        <label>Farm Name: </label><input id="name" type="text" name="name" required ><br>
+        <label>Location </label><input id="location" type="text" name="location" required value=""><br>
+        <label>temp_hi </label><input id="temp_hi" type="text" name="temp_hi" required value=""><br>
+        <label>temp_lo </label><input id="temp_lo" type="text" name="temp_lo" required value=""><br>
+        <label>moist_hi </label><input id="moist_hi" type="text" name="moist_hi" required value=""><br>
+        <label>moist_lo </label><input id="moist_lo" type="text" name="moist_lo" required value=""><br>
+        <input type="submit" class="btn btn-success" value="Submit">
+        <button class="btn" id="clear_form">Clear Form</button>
+        <input type="reset" class="btn" value="Reset Defaults"></input>
+    </form>
+    <button class="btn" onclick="window.location = '/dev'">Back</button>  <!-- onclick="window.history.back()" -->
+
+</div>
+
+
+</body>
+
+<script>
+
+    function getFarms() {
+        $.get("/api/farm/list")
+            .done(function (data) {
+                var farm_sel = $("#farms_dropdown");
+
+                data.forEach(function (element, index) {
+                    console.log(element);
+                    var option = new Option(element.name);
+                    farm_sel.append(option);
+
+                })
+            });
+    }
+
+    function load_farm(name) {
+        var url = '/api/farm/info' + "?name=" + name;
+        $.get(url)
+            .done(function (data) {
+                $('#farm_id').val(data.farm_id);
+                $('#name').val(data.name);
+                $('#location').val(data.location);
+                $('#temp_hi').val(data.thresholds.temperature.high);
+                $('#temp_lo').val(data.thresholds.temperature.low);
+                $('#moist_hi').val(data.thresholds.moisture.high);
+                $('#moist_lo').val(data.thresholds.moisture.low);
+            });
+    }
+
+    $("#load_farm").click(function () {
+        var farm_name = $('#farms_dropdown').val();
+        console.log(farm_name);
+       load_farm(farm_name)
+    });
+    $(document).ready(function () {
+        getFarms();
+    });
+
+
+</script>
+
+</html>

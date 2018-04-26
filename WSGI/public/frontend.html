@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SmartFarm Frontend</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+
+    <script src="/frontend.js"></script>
+
+
+</head>
+<body>
+
+
+<div class="container-fluid"> <!-- If Needed Left and Right Padding in 'md' and 'lg' screen means use container class -->
+    <div class="row">
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            <h3>Farms</h3>
+            <a href="new_farm.html"><button class="btn btn-large">Add New</button></a>
+            <a href="edit_farm.html"><button class="btn btn-large">Edit Farm</button></a>
+            <table  id="farmTable" class="table" border="1">
+                <tr>
+                    <td><b>Name</b></td>
+                    <td><b>Farm ID</b></td>
+                    <td><b>Location</b></td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            <h3>Users</h3>
+            <table  id="usersTable" class="table" border="1">
+                <tr>
+                    <td><b>Name</b></td>
+                    <td><b>Email</b></td>
+                    <td><b>Created Date</b></td>
+                </tr>
+            </table>
+
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            <h3>Sensors</h3>
+                <table  id="vpnDiv" class="table" border="1">
+                <tr>
+                    <td><b>Virtual Address</b></td>
+                    <td><b>Common Name</b></td>
+                    <td><b>Real Address</b></td>
+                </tr>
+                </table>
+
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+
+<script>
+    $( document ).ready(function() {
+        getVpnList();
+        getFarmList();
+        getUsersList();
+    });
+</script>
+</html>

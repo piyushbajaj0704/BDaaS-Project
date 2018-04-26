@@ -1,0 +1,195 @@
+{
+	"variables": [],
+	"info": {
+		"name": "BDAAS",
+		"_postman_id": "1ef75247-a54e-32fd-c0fc-d0ed85abac27",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "iot status update",
+			"request": {
+				"url": "{{backend}}/api/update",
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"description": "from iot device to server. status updates"
+			},
+			"response": []
+		},
+		{
+			"name": "query plants",
+			"request": {
+				"url": {
+					"raw": "{{backend}}/api/farm/query?token={{token}}&start_date=2017-09-24&end_date=2017-12-23&sensor_id=",
+					"host": [
+						"{{backend}}"
+					],
+					"path": [
+						"api",
+						"farm",
+						"query"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "start_date",
+							"value": "2017-09-24",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "end_date",
+							"value": "2017-12-23",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "sensor_id",
+							"value": "",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "querable parameters:\n\nplant: string\nsensor_id: Integer\nfarm_id: Integer\nstart_date: Date (2017-10-30)\nend_date: Date (2017-11-5)"
+			},
+			"response": []
+		},
+		{
+			"name": "authenticate",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"token\", jsonData.token);",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{backend}}/api/authenticate",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "charlestmackay@gmail.com",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "scheeds",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": "get a token using valid username and password"
+			},
+			"response": []
+		},
+		{
+			"name": "test token",
+			"request": {
+				"url": "{{backend}}/api/testtoken",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "test token with GET",
+			"request": {
+				"url": "{{backend}}/api/testtoken",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create User",
+			"request": {
+				"url": "{{backend}}/users/create",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "charlestmackay@gmail.com",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "scheeds",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "test postgres",
+			"request": {
+				"url": "{{backend}}/test_pg",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

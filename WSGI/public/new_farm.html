@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register a new farm</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+<div class="container">
+    <h2>Register a new farm</h2>
+    <form action="/api/farm/add" id="base_form" method="post">
+        <label>Farm ID: </label><input id="farm_id" type="text" name="farm_id" required value=""><br>
+        <label>Farm Name: </label><input id="name" type="text" name="name" required value=""><br>
+        <label>Owner </label><input id="owner" type="text" name="owner" required value=""><br>
+
+        <input type="submit" class="btn btn-success" value="Submit">
+        <button class="btn" id="clear_form">Clear Form</button>
+        <input type="reset" class="btn" value="Reset Defaults"></input>
+    </form>
+    <button class="btn" onclick="window.location = '/dev'">Back</button>  <!-- onclick="window.history.back()" -->
+
+</div>
+
+
+</body>
+</html>
